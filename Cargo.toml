@@ -1,0 +1,24 @@
+[package]
+name = "video-scope-h"
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+authors = ["HexBrowns"]
+description = "VideoScope_H - 今のフレームの輝度の波形・RGB パレード・ベクトルスコープを描く AviUtl2 プラグイン"
+publish = false
+
+[lib]
+name = "video_scope_h"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+aviutl2 = { version = "0.48", features = ["generic"] }
+aviutl2-eframe = "0.48"
+parking_lot = "0.12"
+tracing = "0.1"
+# ウィンドウが見えているかを調べる（MidpointTable_H と同じ）
+# 再生中の受け渡し（share.rs）: 名前付きの共有メモリと、DLL の間で同じ時計（GetTickCount64）
+windows = { version = "0.62", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging", "Win32_Security", "Win32_System_Memory", "Win32_System_SystemInformation"] }
+
+[profile.release]
+lto = true
